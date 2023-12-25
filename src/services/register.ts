@@ -14,18 +14,13 @@ export async function registerUseCase({
   password,
 }: IRegisterUseCaseParams) {
   const passwordHash = await hash(password, 6)
+  const prismaUsersRepository = new PrismaUsersRepository()
 
-  const userWithSameEmail = await prisma.user.findUnique({
-    where: {
-      email,
-    },
-  })
+  const userWithSameEmail = await prismaUsersRepository.findByEmail(email)
 
   if (userWithSameEmail) {
     throw new Error('Email already exists')
   }
-
-  const prismaUsersRepository = new PrismaUsersRepository()
 
   await prismaUsersRepository.create({
     name,
