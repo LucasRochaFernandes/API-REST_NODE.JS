@@ -1,14 +1,19 @@
-import { expect, it, describe } from 'vitest'
+import { expect, it, describe, beforeEach } from 'vitest'
 import { InMemoryUsersRepository } from '@/repositories/inMemory/inMemoryUsersRepository'
 import { AuthenticateUseCase } from './authenticate'
 import { hash } from 'bcryptjs'
 import { InvalidCredentialsError } from './errors/invalidCredentialsError'
 
-describe('Authenticate Use Case', () => {
-  it('Should be able to authenticate an user', async () => {
-    const usersRepository = new InMemoryUsersRepository()
-    const sut = new AuthenticateUseCase(usersRepository)
+let usersRepository: InMemoryUsersRepository
+let sut: AuthenticateUseCase
 
+describe('Authenticate Use Case', () => {
+  beforeEach(() => {
+    usersRepository = new InMemoryUsersRepository()
+    sut = new AuthenticateUseCase(usersRepository)
+  })
+
+  it('Should be able to authenticate an user', async () => {
     const password = '123456'
     const email = 'johndoeauthenticate@example.com'
     const passwordHash = await hash(password, 6)
@@ -28,24 +33,19 @@ describe('Authenticate Use Case', () => {
   })
 
   it('Should not be able to authenticate with wrong email', async () => {
-    const usersRepository = new InMemoryUsersRepository()
-    const sut = new AuthenticateUseCase(usersRepository)
-
     const password = '123456'
     const email = 'johndoeauthenticate@example.com'
 
-    await expect(() =>
-      sut.execute({
-        email,
-        password,
-      }),
+    await expect(
+      async () =>
+        await sut.execute({
+          email,
+          password,
+        }),
     ).rejects.toBeInstanceOf(InvalidCredentialsError)
   })
 
   it('Should not be able to authenticate with wrong password', async () => {
-    const usersRepository = new InMemoryUsersRepository()
-    const sut = new AuthenticateUseCase(usersRepository)
-
     const password = '123456'
     const email = 'johndoeauthenticate@example.com'
     const passwordHash = await hash(password, 6)
@@ -56,11 +56,12 @@ describe('Authenticate Use Case', () => {
       password_hash: passwordHash,
     })
 
-    await expect(() =>
-      sut.execute({
-        email,
-        password: '654321',
-      }),
+    await expect(
+      async () =>
+        await sut.execute({
+          email,
+          password: '654321',
+        }),
     ).rejects.toBeInstanceOf(InvalidCredentialsError)
   })
 })
