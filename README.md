@@ -12,7 +12,7 @@ Gympass style app
 - [X] Should be able the user searches nearby gyms (up to 10 kilometers);
 - [X] Should be able the user searches gyms by name;
 - [X] Should be able the user performs check-in in a gym; 
-- [ ] Should be able validate the user's check-in;
+- [X] Should be able validate the user's check-in;
 - [X] Should be able register a gym.
 
 ## RNs (Regras de negócio)
