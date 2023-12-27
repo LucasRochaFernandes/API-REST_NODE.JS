@@ -7,13 +7,13 @@ Gympass style app
 - [X] Should be able register users;
 - [X] Should be able authenticate users;
 - [X] Should be able get the profile of a logged in user;
-- [ ] Should be able get the numbers of check-ins performed by the logged in user;
-- [ ] Should be able the user gets their check-ins history;
+- [X] Should be able get the numbers of check-ins performed by the logged in user;
+- [X] Should be able the user gets their check-ins history;
 - [ ] Should be able the user searches nearby gyms;
-- [ ] Should be able the user searches gyms by name;
+- [X] Should be able the user searches gyms by name;
 - [X] Should be able the user performs check-in in a gym; 
 - [ ] Should be able validate the user's check-in;
-- [ ] Should be able register a gym.
+- [X] Should be able register a gym.
 
 ## RNs (Regras de negócio)
 
@@ -28,5 +28,5 @@ Gympass style app
 
 - [X] The user's password must be encrypted;
 - [X] The application data must be persisted in a PostgreSQL database;
-- [ ] The all data lists must be paginated with 20 items per page;
+- [X] The all data lists must be paginated with 20 items per page;
 - [ ] The user must be identified by a JWT (Json Web Token)
