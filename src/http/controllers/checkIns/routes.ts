@@ -5,7 +5,7 @@ import { validate } from './validateCheckIn'
 import { history } from './fetchUserCheckInsHistory'
 import { metrics } from './getUserMetrics'
 
-export async function gymsRoutes(app: FastifyInstance) {
+export async function checkInRoutes(app: FastifyInstance) {
   app.addHook('onRequest', verifyJwt)
   app.get('/check-ins/history', history)
   app.get('/check-ins/metrics', metrics)
