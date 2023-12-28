@@ -1,8 +1,16 @@
 # App
 
 Gympass style app
+  A simple API REST using the concepts of SOLID e Design Patterns in a Node.JS environment
 
-## RFs (Requisitos funcionais)
+### Tools used
+  - Prisma
+  - Fastify
+  - Vitest
+  - Docker
+  - PostgreSQL
+
+## FRs (Functional Requirements)
 
 - [X] Should be able register users;
 - [X] Should be able authenticate users;
@@ -15,7 +23,7 @@ Gympass style app
 - [X] Should be able validate the user's check-in;
 - [X] Should be able register a gym.
 
-## RNs (Regras de negócio)
+## BRs (Business Rules)
 
 - [X] The user should not be able to register with a duplicate e-mail;
 - [X] The user should not be able to perform 2 check-ins on the same day;
@@ -24,7 +32,7 @@ Gympass style app
 - [ ] The check-in can only be validated by administrators;
 - [ ] The gym can only be registered by administrators;
 
-## RNFs (Requisitos não-funcionais)
+## RNFs (Non-functional Requirements)
 
 - [X] The user's password must be encrypted;
 - [X] The application data must be persisted in a PostgreSQL database;
