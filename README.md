@@ -1,7 +1,6 @@
 # App
 
-Gympass style app
-  A simple API REST using the concepts of SOLID e Design Patterns in a Node.JS environment
+Gympass style app, a simple API REST using the concepts of SOLID e Design Patterns in a Node.JS environment
 
 ### Tools used
   - Prisma
