@@ -28,12 +28,12 @@ Gympass style app, a simple API REST using the concepts of SOLID e Design Patter
 - [X] The user should not be able to perform 2 check-ins on the same day;
 - [X] The user should not be able to perfomr check-in if they are not near to gym;
 - [X] The check-in can only be validated up to 20 minutes after it is created;
-- [ ] The check-in can only be validated by administrators;
-- [ ] The gym can only be registered by administrators;
+- [X] The check-in can only be validated by administrators;
+- [X] The gym can only be registered by administrators;
 
 ## RNFs (Non-functional Requirements)
 
 - [X] The user's password must be encrypted;
 - [X] The application data must be persisted in a PostgreSQL database;
 - [X] The all data lists must be paginated with 20 items per page;
-- [ ] The user must be identified by a JWT (Json Web Token)
+- [X] The user must be identified by a JWT (Json Web Token)
