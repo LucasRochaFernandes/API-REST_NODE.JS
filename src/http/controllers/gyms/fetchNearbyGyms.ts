@@ -6,7 +6,7 @@ export async function fetchNearbyGyms(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const fetchNearbyGymsSchema = z.object({
+  const fetchNearbyGymsQuerySchema = z.object({
     latitude: z.number().refine((value) => {
       return Math.abs(value) <= 90
     }),
@@ -15,7 +15,9 @@ export async function fetchNearbyGyms(
     }),
   })
 
-  const { latitude, longitude } = fetchNearbyGymsSchema.parse(request.body)
+  const { latitude, longitude } = fetchNearbyGymsQuerySchema.parse(
+    request.query,
+  )
 
   const fetchNearbyGymsUseCase = makeFetchNearbyGymsUseCase()
   const { gyms } = await fetchNearbyGymsUseCase.execute({

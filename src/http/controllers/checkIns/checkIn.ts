@@ -1,28 +1,32 @@
 import { z } from 'zod'
 import { FastifyRequest, FastifyReply } from 'fastify'
-import { UserAlreadyExistsError } from '@/services/errors/userAlreadyExistsError'
-import { makeRegisterUseCase } from '@/services/factories/makeRegisterUseCase'
+import { makeCheckInUseCase } from '@/services/factories/makeCheckInUseCase'
 
-export async function register(request: FastifyRequest, reply: FastifyReply) {
-  const registerBodySchema = z.object({
-    name: z.string(),
-    email: z.string(),
-    password: z.string().min(6),
+export async function create(request: FastifyRequest, reply: FastifyReply) {
+  const createCheckInParamsSchema = z.object({
+    gymId: z.string().uuid(),
   })
 
-  const { name, email, password } = registerBodySchema.parse(request.body)
+  const createCheckInBodySchema = z.object({
+    latitude: z.number().refine((value) => {
+      return Math.abs(value) <= 90
+    }),
+    longitude: z.number().refine((value) => {
+      return Math.abs(value) <= 180
+    }),
+  })
 
-  try {
-    const registerUseCase = makeRegisterUseCase()
-    await registerUseCase.execute({ name, email, password })
-  } catch (error) {
-    if (error instanceof UserAlreadyExistsError) {
-      return reply.status(409).send({
-        message: error.message,
-      })
-    }
-    throw error
-  }
+  const { gymId } = createCheckInParamsSchema.parse(request.params)
+  const { latitude, longitude } = createCheckInBodySchema.parse(request.body)
+
+  const checkInUseCase = makeCheckInUseCase()
+
+  await checkInUseCase.execute({
+    userId: request.user.sub,
+    gymId,
+    userLatitude: latitude,
+    userLongitude: longitude,
+  })
 
   return reply.status(201).send()
 }
