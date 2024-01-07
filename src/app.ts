@@ -6,8 +6,11 @@ import { usersRoutes } from './http/controllers/users/routes'
 import { gymsRoutes } from './http/controllers/gyms/routes'
 import { checkInRoutes } from './http/controllers/checkIns/routes'
 import fastifyCookie from '@fastify/cookie'
+import cors from '@fastify/cors'
 
 export const app = fastify()
+
+app.register(cors)
 
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,

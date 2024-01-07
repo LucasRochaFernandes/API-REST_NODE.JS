@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Gympass style app",
   "main": "index.js",
-  "engines":{
+  "engines": {
     "node": "18"
   },
   "scripts": {
@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@fastify/cookie": "9.2.0",
+    "@fastify/cors": "8.5.0",
     "@fastify/jwt": "7.2.4",
     "@prisma/client": "5.7.1",
     "bcryptjs": "2.4.3",
